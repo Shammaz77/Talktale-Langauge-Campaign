@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAFLATHULQURAN | JANUARY 20 | MONDAY | SIRAJUL HUDA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="form-page">
+        <div class="container-main">
+            <div class="wrapperr">
+                <div class="form-box">
+                    <img src="./images/thahfilul quran.png" class="poster" alt="">
+
+                    <div class="inner-box">
+                        <form id="registrationForm" onsubmit="submitForm(event)">
+                            <div class="form-group">
+                                <label for="name" class="label-form">Name:</label>
+                                <input type="text" id="name" class="form-control" name="name" placeholder="Enter Your Name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="institution" class="label-form">Institution:</label>
+                                <input type="text" id="institution" class="form-control" name="institution" placeholder="Enter Your Institution" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="whatsapp" class="label-form">WhatsApp:</label>
+                                <input type="number" id="whatsapp" class="form-control" name="whatsapp" placeholder="Enter Your WhatsApp Number" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="instPhone" class="label-form">Institution Phone:</label>
+                                <input type="number" id="instPhone" class="form-control" name="instPhone" placeholder="Enter Institution Phone Number" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="place" class="label-form">Place:</label>
+                                <input type="text" id="place" class="form-control" name="place" placeholder="Enter Your Place" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="district" class="label-form">District:</label>
+                                <input type="text" id="district" class="form-control" name="district" placeholder="Enter Your District" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="type" class="label-form">Type:</label>
+                                <select class="form-select" id="type" name="type" aria-label="Default select example" required>
+                                    <option selected disabled value="">Select Type</option>
+                                    <option value="Student">Student</option>
+                                    <option value="Professional">Professional</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-submit">Submit</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function submitForm(e) {
+            e.preventDefault();
+
+            const form = document.getElementById('registrationForm');
+            const submitButton = document.querySelector('.btn-submit');
+
+            // Prevent multiple submissions
+            if (submitButton.disabled) {
+                return;
+            }
+
+            // Add loading state to the button
+            submitButton.disabled = true;
+            submitButton.textContent = 'Loading...';
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            console.log(data);
+
+            // Define the Google Apps Script URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxFao0XUoYDu1vCwPKNdm_uFsFZ5-8PuUdGKuJHcsEFolz8IsBF7C5Y78dNgNnLffw0/exec';
+
+            const queryString = new URLSearchParams({
+                name: data.name,
+                place: data.place,
+                district: data.district,
+                type: data.type,
+                institution: data.institution,
+                whatsapp: data.whatsapp,
+                instPhone: data.instPhone,
+                callback: 'handleResponse'
+            }).toString();
+
+            // Create script element
+            const script = document.createElement('script');
+            script.src = `${scriptURL}?${queryString}`;
+            document.body.appendChild(script);
+
+            // Remove script after execution
+            script.onload = function () {
+                document.body.removeChild(script);
+            };
+        }
+
+        // Callback function
+        function handleResponse(response) {
+            const submitButton = document.querySelector('.btn-submit');
+
+            if (response.status === 'success') {
+                alert('Success! Form submitted successfully.');
+                document.getElementById('registrationForm').reset(); // Clear the form fields
+            } else {
+                alert('Error! Something went wrong.');
+            }
+
+            // Reset the button state
+            submitButton.disabled = false;
+            submitButton.textContent = 'Submit';
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
