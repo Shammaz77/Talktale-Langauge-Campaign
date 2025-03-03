@@ -43,6 +43,14 @@
 									<label for="instPhone" class="label-form"> Phone Number:</label>
 									<input type="number" id="instPhone" class="form-control" placeholder="Enter  Phone Number" name="instPhone" required>
 							</div>
+							<div class="form-group">
+								<label for="type" class="label-form">Select Batch:</label>
+							<select class="form-select" for="type" name="type"  id="type" aria-label="Default select example">
+								<option selected>Date</option>
+								<option value="March 04 - 14">March 04 - 14</option>
+								<option value="March 14 - 24">March 14 - 24</option>
+							</select>
+						</div>
 							
 							<button type="submit" class="btn btn-submit">Submit</button>
 					</form>
@@ -75,16 +83,16 @@
 			const data = Object.fromEntries(formData);
 			console.log(data);
 			// Define the Google Apps Script URL
-			const scriptURL = 'https://script.google.com/macros/s/AKfycbxFao0XUoYDu1vCwPKNdm_uFsFZ5-8PuUdGKuJHcsEFolz8IsBF7C5Y78dNgNnLffw0/exec';
+			const scriptURL = 'https://script.google.com/macros/s/AKfycbxfi4u6G2ed365_pz3kKVkZ7RBgx6Qkq6vGjIN0M5sBJdyhYkpqNZ8FweqyZoOeq3M5/exec';
 	
 			const queryString = new URLSearchParams({
 				name: data.name,
 				place: data.place,
 				district: data.district,
-				type: data.type,
 				institution: data.institution,
 				whatsapp: data.whatsapp,
 				instPhone: data.instPhone,
+				type: data.type,
 				callback: 'handleResponse'
 			}).toString();
 	
